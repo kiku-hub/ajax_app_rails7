@@ -8,6 +8,9 @@ class PostsController < ApplicationController
 
   def create
     Post.create(content: params[:content])
-    redirect_to action: :index
+    # フォームから送られたcontentのデータで、新しいPostをデータベースに保存。
+    render json:{ post: post }
+    
+
   end
 end

@@ -3,7 +3,9 @@ function post (){
   const form = document.getElementById("form");
   // document.getElementById("form")を使って、HTMLのIDが"form"である要素（通常は<form>タグ）を取得し、formという定数に代入しています。これは、特定のフォームを操作するために使用されます。
   form.addEventListener("submit", (e) => {
+    // フォームが送信されるときに実行される関数を設定します。
     e.preventDefault();
+    // フォームのデフォルト送信動作（ページリロードなど）をキャンセルして、カスタム処理を行う準備をします。
     const formData = new FormData(form);
 // FormDataオブジェクトを作成し、formに入力されたデータを収集します。これにより、フォームの全データをformDataという変数に保存して、あとで送信や操作が可能になります。
     const XHR = new XMLHttpRequest();
