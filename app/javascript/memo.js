@@ -1,3 +1,17 @@
+const buildHTML = (XHR) => {
+  const item = XHR.response.post;
+  const html = `
+    <div class="post">
+      <div class="post-date">
+        投稿日時：${item.created_at}
+      </div>
+      <div class="post-content">
+        ${item.content}
+      </div>
+    </div>`;
+  return html;
+};
+
 function post (){
   // postという名前の関数を定義しています。この関数は、後でHTMLのフォームが送信されるときに実行される処理を記述します。
   const form = document.getElementById("form");
@@ -14,6 +28,16 @@ function post (){
     // POSTメソッドを使って、/postsというURLに非同期でリクエストを送信する準備をするためのものです。
     XHR.responseType = "json";
     XHR.send(formData);
+    XHR.onload = () => {
+      if (XHR.status != 200) {
+        alert(`Error ${XHR.status}: ${XHR.statusText}`);
+        return null;
+      };
+      const list = document.getElementById("list");
+      const formText = document.getElementById("content");
+      list.insertAdjacentHTML("afterend", buildHTML(XHR));
+        formText.value = "";
+    };
   });
 };
  
